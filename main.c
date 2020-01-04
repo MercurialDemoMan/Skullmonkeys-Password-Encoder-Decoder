@@ -191,8 +191,8 @@ u8 decode_password(u8* pwd_buffer, u8 pwd_length, u8* data_buffer)
     //(note: it should iterate through 33 bits because 11 valid symbols * 3 bits = 33, but the game ignores
     //       the last bit of the last valid symbol, so for example passwords:
     //           R2 L1 R1 L2 L1 R1 R2 L2 L1 R2 R1 L2
-    //            R2 L1 R1 L2 L1 R1 R2 L2 L1 R2 Triangle Square
-    //         are equivalent)
+    //           R2 L1 R1 L2 L1 R1 R2 L2 L1 R2 Triangle Square
+    //       are equivalent)
     //for each bit that is 1, based on lookup table, choose which data will be modified and how it will be modified
     u32 idx     = 0; // <- symbol index
     u32 shifter = 0; // <- symbol bit index
