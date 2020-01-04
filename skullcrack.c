@@ -1,3 +1,9 @@
+/**
+ * \header skullmonkeys password encoder/decoder
+ * \author MercurialDemoMan
+ * \date 4. Jan 2020
+ */
+
 #include <stdio.h>
 #include <stdint.h>
 #include <string.h>
