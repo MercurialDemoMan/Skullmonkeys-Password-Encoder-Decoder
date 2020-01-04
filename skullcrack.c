@@ -150,8 +150,9 @@ static char* symbol_names[] =
 
 /**
  * \brief decode password
- * \arg pwd_buffer - pointer to array of 12 bytes
- * \arg pwd_length - password length
+ * \arg pwd_buffer - pointer to array of 12 bytes to read from
+ * \arg pwd_length - password length to read from
+ * \arg data_buffer - pointer to array of 8 bytes to write to
  */
 u8 decode_password(u8* pwd_buffer, u8 pwd_length, u8* data_buffer)
 {
@@ -255,9 +256,9 @@ u8 decode_password(u8* pwd_buffer, u8 pwd_length, u8* data_buffer)
 
 /**
  * \brief encode password
- * \arg data - pointer to array of 8 bytes
- * \arg pwd_buffer - pointer to array of 12 bytes so we can set it
- * \arg pwd_length - pointer to password length so we can set it
+ * \arg data - pointer to array of 8 bytes to read from
+ * \arg pwd_buffer - pointer to array of 12 bytes to write to
+ * \arg pwd_length - pointer to password length to write to
  */
 u8 encode_password(u8* data, u8* pwd_buffer, u8* pwd_length)
 {
