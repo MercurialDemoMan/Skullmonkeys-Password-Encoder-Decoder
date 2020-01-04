@@ -1,2 +1,2 @@
 all:
-	gcc main.c -std=c99 -O2 -o skullcrack
+	gcc skullcrack.c -std=c99 -O2 -o skullcrack
