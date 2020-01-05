@@ -21,6 +21,7 @@ Saved items:
 	Enema:   0 - 7
 	1870s:   0 - 3
 	Level:   1 - 31 (note: there are only 25 real levels, levels between 26 and 31 are treated as Skullmonkeys Gate level)
+	Password seed: 0 - 48 (note: extra value to make password with same data different)
 
 PSX RAM Layout:
 
@@ -32,4 +33,15 @@ PSX RAM Layout:
 
 	Password data lookup table: 0x8009B1F4
 
-Everything else is in the source
+Password:
+
+	Consists of password buffer and password length.
+
+	Last symbol of a password is checksum and is calculated by adding previous symbols together and then taking the first 3 low significant bits.
+
+	Each symbol excluding the check sum represents data.
+	Each bit set to 1 in the symbol represents data modification.
+	Data modification is managed through lookup table.
+	Lookup table is 64 bytes long and contains pairs consisting of [data index, data modification]
+	Index into the lookup table for a pair is the bit index which is being currently processed and set to 1
+	It will then OR the data with the value from the lookup table.
