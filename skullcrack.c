@@ -45,7 +45,7 @@ typedef enum
  * \brief password accumulator lookup table
  * \note extracted from psx memory at 0x8009B1F4 
  */
-static u8 pwd_data_lookup_table[] = 
+static u8 pwd_data_lookup_table[64] = 
 {
     0x01, 0x00, 
     0x01, 0x01,
@@ -303,7 +303,7 @@ u8 encode_password(u8* data, u8* pwd_buffer, u8* pwd_length)
 
     for(u32 i = 0; i < 32; i++)
     {
-        u8 t1 = pwd_data_lookup_table[i * 2];
+        u8 t1 = pwd_data_lookup_table[(i * 2) + 0];
         u8 t2 = pwd_data_lookup_table[(i * 2) + 1];
 
         u8 v0 = data[t1] >> t2;
@@ -433,8 +433,18 @@ int main(int argc, char* argv[])
                 //print result
                 if(res)
                 {
-                    printf("Valid password\nLevel: %u\nLives: %u\nBirds: %u\nPharts: %u\nEnemas: %u\nWillies: %u\n1970s: %u\nSeed: %u\n",
-                        data_buffer[level], data_buffer[lives], data_buffer[birds], data_buffer[pharts], data_buffer[enemas], data_buffer[willies], data_buffer[_1970s], data_buffer[seed]);
+                    printf("Valid password\n"
+                           "%s"
+                           "%s\nLives: %u\nBirds: %u\nPharts: %u\nEnemas: %u\nWillies: %u\n1970s: %u\nSeed: %u\n",
+                        data_buffer[level] > 25 ? "Warning: game will reset all power ups when level is above 25\n" : "",
+                        data_buffer[level] > 25 ? level_names[0] : level_names[data_buffer[level] - 1],
+                        data_buffer[lives], 
+                        data_buffer[birds], 
+                        data_buffer[pharts], 
+                        data_buffer[enemas], 
+                        data_buffer[willies], 
+                        data_buffer[_1970s], 
+                        data_buffer[seed]);
                 }
                 else
                 {
@@ -464,6 +474,11 @@ int main(int argc, char* argv[])
                         printf("Error: data contain invalid characters\n"); 
                         printf("Note: just use numbers\n");
                         return 0; 
+                    }
+
+                    if(i - 2 == 0 && (u8)input_buffer > 25) 
+                    { 
+                        printf("Warning: when level is above 25 power ups will be encoded, but game will reset them\n");
                     }
 
                     data_buffer[i - 2] = (u8)input_buffer;
