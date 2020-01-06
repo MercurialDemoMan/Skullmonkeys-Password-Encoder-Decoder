@@ -284,7 +284,8 @@ u8 encode_password(u8* data, u8* pwd_buffer, u8* pwd_length)
 
     //check bounds
     //if you comment this, the game will not accept the password
-    if(data[level] > 31)  { printf("Error: level out of bounds\n");   return 0; }
+    if(data[level] > 31 || 
+       data[level] == 0)  { printf("Error: level out of bounds\n");   return 0; }
     if(data[lives] > 99)  { printf("Error: lives out of bounds\n");   return 0; }
     if(data[birds] > 7)   { printf("Error: birds out of bounds\n");   return 0; }
     if(data[pharts] > 7)  { printf("Error: pharts out of bounds\n");  return 0; }
@@ -298,25 +299,25 @@ u8 encode_password(u8* data, u8* pwd_buffer, u8* pwd_length)
 
     //main encoding loop
     //same what is going on in decode_password but in revere
-    u8 counter1 = 0;
-    u8 counter2 = 0;
+    u8 idx = 0;
+    u8 shifter = 0;
 
     for(u32 i = 0; i < 32; i++)
     {
         u8 t1 = pwd_data_lookup_table[(i * 2) + 0];
         u8 t2 = pwd_data_lookup_table[(i * 2) + 1];
 
-        u8 v0 = data[t1] >> t2;
+        u8 t3 = data[t1] >> t2;
 
-        if((v0 & 1) != 0)
+        if((t3 & 1) == 1)
         {
-            pwd_buffer[counter1] = pwd_buffer[counter1] | (1 << counter2);
+            pwd_buffer[idx] = pwd_buffer[idx] | (1 << shifter);
         }
 
-        if(++counter2 >= 3)
+        if(++shifter >= 3)
         {
-            counter2 = 0;
-            counter1++;
+            shifter = 0;
+            idx++;
         }
     }
 
