@@ -299,7 +299,7 @@ u8 encode_password(u8* data, u8* pwd_buffer, u8* pwd_length)
 
     //main encoding loop
     //same what is going on in decode_password but in revere
-    u8 idx = 0;
+    u8 idx     = 0;
     u8 shifter = 0;
 
     for(u32 i = 0; i < 32; i++)
