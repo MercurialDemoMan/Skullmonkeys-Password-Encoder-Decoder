@@ -319,7 +319,7 @@ u8 encode_password(u8* data, u8* pwd_buffer, u8* pwd_length)
     memset(pwd_buffer, 0, 12);
 
     //main encoding loop
-    //same what is going on in decode_password but in revere
+    //same what is going on in decode_password but in reverse
     u8 idx     = 0;
     u8 shifter = 0;
 
