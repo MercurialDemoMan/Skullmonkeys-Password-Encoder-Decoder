@@ -3,7 +3,7 @@ Skullmonkeys passwords
 Symbols (values represent byte)
 
 	Empty space = 0x00
-	Cross       = 0x00 (note: cross is not equivalent with empty space! Password length also takes place in password verifaction)
+	Cross       = 0x00 (note: cross is not equivalent to empty space! Password length also takes place in password verifaction)
 	Square      = 0x01
 	Triangle    = 0x02
 	Circle      = 0x03
