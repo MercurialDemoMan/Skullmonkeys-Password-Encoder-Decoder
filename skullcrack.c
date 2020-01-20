@@ -541,7 +541,7 @@ int main(int argc, char* argv[])
         //invalid command
         else
         {
-            printf("Error: First argument must be \"-c\" or \"-e\"");
+            printf("Error: First argument must be \"-d\" or \"-e\"");
         }
 
         #undef strequ
